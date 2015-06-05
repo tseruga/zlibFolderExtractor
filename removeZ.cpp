@@ -19,7 +19,7 @@ int main()
 	//////////////FILL IN DIRECTORY OF YOUR EXECUTABLE HERE!///////////////
 	string exeDir = "/home/tyler/Desktop/removeZ/";
 	//////////////FILL IN NAME OF FOLDER TO UNCOMPRESS HERE!////////////////
-	string folderToUncomp = "FS";
+	string folderToUncomp = "CrossSection";
 	
 	vector<string> files = getFiles(exeDir, folderToUncomp);
 
@@ -27,22 +27,21 @@ int main()
 		return 0; //Exit if no files found in folder to uncompress
 
 	for(auto i = 0; i < files.size(); i++) {
-		if(files[i] == "." || files[i] == "..")
-			continue;
 		uncompressFile(exeDir + folderToUncomp + "/", files[i], folderToUncomp);
 	}
 }
 
 vector<string> getFiles(string exeDir, string folderToUncomp) {
 	vector<string> files;
-
+	cout << exeDir + folderToUncomp << endl;
 	DIR *dir;
 	struct dirent *ent;
 	dir = opendir((exeDir+folderToUncomp).c_str());
 	if ( dir != NULL) {
 		while ((ent = readdir (dir)) != NULL) {
-			if(ent->d_name != "." || ent->d_name != "..")
-				files.push_back(ent->d_name);
+			files.push_back(ent->d_name);
+			if(files.back() == "." || files.back() == "..")
+				files.pop_back();
 		}
 	closedir (dir);
 	} else {
