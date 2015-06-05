@@ -29,11 +29,11 @@ int main()
 	for(auto i = 0; i < files.size(); i++) {
 		uncompressFile(exeDir + folderToUncomp + "/", files[i], folderToUncomp);
 	}
+	cout << "Uncompression completed successfully :)" << endl;
 }
 
 vector<string> getFiles(string exeDir, string folderToUncomp) {
 	vector<string> files;
-	cout << exeDir + folderToUncomp << endl;
 	DIR *dir;
 	struct dirent *ent;
 	dir = opendir((exeDir+folderToUncomp).c_str());
