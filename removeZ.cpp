@@ -26,8 +26,7 @@ int main()
 	if(files.size() == 0)
 		return 0; //Exit if no files found in folder to uncompress
 
-	for(auto i = 0; i < files.size(); i++)
-	{
+	for(auto i = 0; i < files.size(); i++) {
 		if(files[i] == "." || files[i] == "..")
 			continue;
 		uncompressFile(exeDir + folderToUncomp + "/", files[i], folderToUncomp);
@@ -67,10 +66,10 @@ void uncompressFile(string filepath, string filename, string folderToUncomp) {
 		in.read((char*)compressed , compLength );
 	}
 
-    unsigned long int compSize = (unsigned long int) ( compLength*4 );
+	unsigned long int compSize = (unsigned long int) ( compLength*4 );
 	Byte* uncompressed = new Byte[compSize];
 
-    while (Z_OK != uncompress (uncompressed, &compSize , compressed , compLength)) {
+	while (Z_OK != uncompress (uncompressed, &compSize , compressed , compLength)) {
 		delete[] uncompressed;
 		compSize *= 2; //Grow until big enough
 		uncompressed = new Byte[compSize];
